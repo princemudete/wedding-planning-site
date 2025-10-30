@@ -1,4 +1,5 @@
 import { ArrowRight, Heart, Calendar, Users, DollarSign } from 'lucide-react';
+import Gallery from './Gallery';
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -93,6 +94,8 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           </p>
         </section>
       </main>
+
+      <Gallery />
 
       <footer className="bg-gradient-to-r from-rose-100 via-amber-100 to-emerald-100 py-8 mt-20">
         <div className="container mx-auto px-6 text-center text-gray-600">

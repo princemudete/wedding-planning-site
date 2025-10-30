@@ -23,6 +23,8 @@ export default function WeddingForm({ onClose, onSuccess, wedding }: WeddingForm
     budget: wedding?.budget || '',
     theme: wedding?.theme || '',
     notes: wedding?.notes || '',
+    image_url: wedding?.image_url || '',
+    status: wedding?.status || 'Planning',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,6 +44,8 @@ export default function WeddingForm({ onClose, onSuccess, wedding }: WeddingForm
         budget: formData.budget ? parseFloat(formData.budget.toString()) : null,
         theme: formData.theme || null,
         notes: formData.notes || null,
+        image_url: formData.image_url || null,
+        status: formData.status || 'Planning',
         updated_at: new Date().toISOString(),
       };
 
@@ -162,17 +166,48 @@ export default function WeddingForm({ onClose, onSuccess, wedding }: WeddingForm
             </div>
           </div>
 
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Wedding Theme (optional)
+              </label>
+              <input
+                type="text"
+                value={formData.theme}
+                onChange={(e) => setFormData({ ...formData, theme: e.target.value })}
+                placeholder="e.g., Rustic Garden, Modern Elegance"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-400 focus:border-transparent outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Status
+              </label>
+              <select
+                value={formData.status}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-400 focus:border-transparent outline-none"
+              >
+                <option value="Planning">Planning</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Wedding Theme (optional)
+              Image URL (optional)
             </label>
             <input
-              type="text"
-              value={formData.theme}
-              onChange={(e) => setFormData({ ...formData, theme: e.target.value })}
-              placeholder="e.g., Rustic Garden, Modern Elegance"
+              type="url"
+              value={formData.image_url}
+              onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+              placeholder="https://example.com/wedding-image.jpg"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-400 focus:border-transparent outline-none"
             />
+            <p className="text-xs text-gray-500 mt-1">Add a beautiful image URL for your wedding</p>
           </div>
 
           <div>

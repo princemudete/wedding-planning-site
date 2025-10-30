@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import type { Wedding } from '../lib/supabase';
 import WeddingForm from './WeddingForm';
+import Countdown from './Countdown';
 
 export default function Dashboard() {
   const { user, signOut } = useAuth();
@@ -62,6 +63,18 @@ export default function Dashboard() {
       month: 'long',
       day: 'numeric',
     });
+  };
+
+  const getDefaultImage = (index: number) => {
+    const images = [
+      'https://images.pexels.com/photos/265722/pexels-photo-265722.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1616113/pexels-photo-1616113.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800',
+    ];
+    return images[index % images.length];
   };
 
   return (
@@ -127,20 +140,34 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {weddings.map((wedding) => (
+            {weddings.map((wedding, index) => (
               <div
                 key={wedding.id}
                 className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow overflow-hidden"
               >
-                <div className="bg-gradient-to-r from-rose-100 to-amber-100 p-6">
-                  <h3 className="text-2xl font-serif mb-2">{wedding.couple_names}</h3>
-                  <div className="flex items-center gap-2 text-gray-700">
-                    <Calendar className="w-4 h-4" />
-                    <span>{formatDate(wedding.wedding_date)}</span>
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={wedding.image_url || getDefaultImage(index)}
+                    alt={wedding.couple_names}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-2xl font-serif text-white mb-1">{wedding.couple_names}</h3>
+                    <div className="flex items-center gap-2 text-white/90">
+                      <Calendar className="w-4 h-4" />
+                      <span className="text-sm">{formatDate(wedding.wedding_date)}</span>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <span className="inline-block px-3 py-1 bg-white/90 backdrop-blur-sm text-rose-600 rounded-full text-xs font-medium">
+                      {wedding.status || 'Planning'}
+                    </span>
                   </div>
                 </div>
 
                 <div className="p-6 space-y-4">
+                  <Countdown targetDate={wedding.wedding_date} />
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
                     <div>
