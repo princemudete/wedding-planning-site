@@ -8,17 +8,24 @@ interface LandingPageProps {
 export default function LandingPage({ onGetStarted }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50">
-      <nav className="container mx-auto px-6 py-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <Heart className="w-8 h-8 text-rose-400" fill="currentColor" />
-          <span className="text-2xl font-serif">Ever After</span>
+      <nav className="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Heart className="w-8 h-8 text-rose-400" fill="currentColor" />
+            <span className="text-2xl font-serif">Ever After</span>
+          </div>
+          <div className="flex items-center gap-8">
+            <a href="#gallery" className="text-gray-600 hover:text-rose-400 transition-colors font-medium">
+              Gallery
+            </a>
+            <button
+              onClick={onGetStarted}
+              className="px-6 py-2 bg-rose-400 text-white rounded-full hover:bg-rose-500 transition-colors"
+            >
+              Sign In
+            </button>
+          </div>
         </div>
-        <button
-          onClick={onGetStarted}
-          className="px-6 py-2 bg-rose-400 text-white rounded-full hover:bg-rose-500 transition-colors"
-        >
-          Sign In
-        </button>
       </nav>
 
       <main className="container mx-auto px-6">
@@ -85,21 +92,49 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
           </div>
         </section>
 
-        <section className="py-20 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif mb-6">
-            Crafting Unforgettable Moments
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-12">
-            We believe every love story deserves a magical beginning. Our platform empowers you to design, organize, and dream. From picking themes and building budgets to curating guest lists and saving beautiful ideas, our tools give you control to create lasting memories.
-          </p>
+        <section className="py-20">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-serif mb-6">
+              Crafting Unforgettable Moments
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              We believe every love story deserves a magical beginning. Our platform empowers you to design, organize, and dream. From picking themes and building budgets to curating guest lists and saving beautiful ideas, our tools give you control to create lasting memories.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <img
+                src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Wedding ceremony"
+                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <img
+                src="https://images.pexels.com/photos/1616113/pexels-photo-1616113.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Wedding reception"
+                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              <img
+                src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Wedding celebration"
+                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div>
         </section>
       </main>
 
-      <Gallery />
+      <section id="gallery">
+        <Gallery />
+      </section>
 
       <footer className="bg-gradient-to-r from-rose-100 via-amber-100 to-emerald-100 py-8 mt-20">
         <div className="container mx-auto px-6 text-center text-gray-600">
-          <p>© 2025 Ever After. Crafted with love.</p>
+          <p>© 2024 Ever After. Crafted with love.</p>
         </div>
       </footer>
     </div>
