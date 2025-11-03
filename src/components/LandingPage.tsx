@@ -134,7 +134,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
 
       <footer className="bg-gradient-to-r from-rose-100 via-amber-100 to-emerald-100 py-8 mt-20">
         <div className="container mx-auto px-6 text-center text-gray-600">
-          <p>© 2024 Ever After. Crafted with love.</p>
+          <p>© 2025 Ever After. Crafted with love.</p>
         </div>
       </footer>
     </div>
